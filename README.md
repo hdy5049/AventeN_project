@@ -1,5 +1,5 @@
 # 🏎️ 아반떼 N (Avante N) 실소유주 리뷰 심층 분석기
-
+### 🧠 유튜브 댓글 기반 실소유주 분석 프로젝트
 "그 돈이면 씨..."(그돈씨)를 외치는 비방글은 거르고, **진짜 오너들의 목소리만 듣는다.**
 
 <div align="center">
@@ -23,27 +23,91 @@
 
 ---
 
-## 📊 데이터 분석 시각화 (Visualization)
+## 🗂 데이터 수집 & 전처리
 
-오너들이 아반떼 N을 선택할 때 어떤 차종과 가장 치열하게 고민했는지,  
-그리고 어떤 매력 포인트 때문에 최종 선택을 했는지 시각화한 그래프입니다.
-
-<div align="center">
-<img src="avante3.png" width="95%" alt="Analysis Graph" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" />
-</div>
+- YouTube 댓글 크롤링
+- 멀티 CSV 통합 (총 6개)
+- 중복 제거 및 텍스트 전처리
+- 실오너/비오너/비교 리뷰 자동 라벨링
 
 ---
 
-## 💡 분석 인사이트 (Insights)
+## 📊 1. 댓글 필터링 단계별 감소 과정
 
-### ✔ 최다 비교군  
-BMW 3시리즈 / M 계열과의 비교 언급이 **가장 많음** →  
-오너들이 이 차를 **스포츠 드라이빙 머신**으로 인식한다는 증거.
+> 원본 댓글 → 의미 있는 댓글 → 경험 기반 → 실오너
 
-### ✔ 승리 요인  
-브랜드나 고급감은 부족하지만  
-**운전 재미, 코너링, 배기음, 가성비**에서 압도적 우세.
+<div align="center">
+  <img src="avante4.png" width="75%" alt="Filtering Pipeline" />
+</div>
 
+**해석**  
+단계별로 댓글 수가 급격히 줄어드는 것은,  
+“실제 경험 기반” 문장만을 골라낸 필터의 강력함을 의미합니다.
+
+---
+
+## 📊 2. 리뷰 유형 비율
+
+<div align="center">
+  <img src="avante5.png" width="60%" alt="Review Ratio" />
+</div>
+
+**해석**  
+비오너(관전평) 댓글이 과반을 차지하고,  
+실오너는 소수지만 **질적 내용이 풍부**합니다.
+
+---
+
+## 📊 3. 경쟁 차종 언급 빈도
+
+<div align="center">
+  <img src="avante3.png" width="95%" alt="Competitor Mentions" />
+</div>
+
+**해석**  
+가장 많이 비교된 모델은  
+- BMW 3시리즈 / M 계열  
+- 제네시스 G70  
+- 머스탱 / 카마로  
+입니다.  
+이는 아반떼 N이 **순수 스포츠 드라이빙 머신**으로 인식된다는 증거입니다.
+
+---
+
+## 📊 4. 오너 vs 비오너 리뷰 길이 분포
+
+<div align="center">
+  <img src="avante6.png" width="80%" alt="Review Length Distribution" />
+</div>
+
+**해석**  
+실오너 리뷰는 비오너 리뷰보다 글 길이가 훨씬 깁니다.  
+이는 **경험 기반 서술 중심**임을 의미합니다.
+
+---
+
+## 📊 5. 오너 핵심 가치 키워드 분석
+
+<div align="center">
+  <img src="avante7.png" width="80%" alt="Owner Keyword Importance" />
+</div>
+
+**해석**  
+오너들이 가장 많이 언급한 키워드:
+
+- 운전 재미
+- 코너링
+- 배기음
+- DCT 반응
+- 가성비
+
+브랜드/고급감보다  
+**‘운전 경험’**이 핵심 가치로 드러납니다.
+
+---
+
+## 💬 Voice of Real Owners  
+### CSV 기반 실오너 의견 자동 추출
 ---
 
 ## 💬 Voice of Real Owners : 찐 오너들의 비교 리뷰
@@ -97,3 +161,4 @@ def classify(text):
     if len(t.strip()) < 5:
         return "noise"
     return "non-owner"
+
